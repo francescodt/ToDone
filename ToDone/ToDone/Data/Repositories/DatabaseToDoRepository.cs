@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +10,18 @@ namespace ToDone.Data.Repositories
 {
     public class DatabaseToDoRepository : IToDoRepository
     {
-        public Task<IEnumerable<ToDoListDTO>> GetToDoList()
+        public async Task<IEnumerable<ToDoListDTO>> GetToDoList()
         {
-            throw new NotImplementedException();
+            var list = await _context.Lists
+                .Select(list => new ToDoListDTO
+                {
+                    Id = list.Id,
+                    Name = list.Name,
+                    DueDate = list.DueDate,
+                    Assignee = list.Assignee,
+                })
+                .ToListAsync();
+            return list;
         }
 
         private readonly ToDoListDbContext _context;
