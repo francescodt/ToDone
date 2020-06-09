@@ -32,7 +32,7 @@ namespace ToDone
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDbContext<ToDoListDbContext>(options => {
+            services.AddDbContext<UserDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
         }

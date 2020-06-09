@@ -15,6 +15,18 @@ namespace ToDone.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ToDoList>().HasData(
+                new ToDoList
+                {
+                    Id = 1,
+                    Name = "Fake Company",
+                    DueDate = new DateTime(2020, 6, 08, 20, 49, 20, DateTimeKind.Utc),
+                    Assignee = "Francesco",
+                });
+        }
+
         public DbSet<ToDoList>Lists {get; set;}
     }
 }
