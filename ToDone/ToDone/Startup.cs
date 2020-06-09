@@ -31,6 +31,10 @@ namespace ToDone
             services.AddDbContext<ToDoListDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddDbContext<ToDoListDbContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
