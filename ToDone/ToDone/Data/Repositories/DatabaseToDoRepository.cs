@@ -13,5 +13,12 @@ namespace ToDone.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        private readonly ToDoListDbContext _context;
+        public DatabaseToDoRepository(ToDoListDbContext context)
+        {
+            _context = context;
+        }
+
     }
 }
