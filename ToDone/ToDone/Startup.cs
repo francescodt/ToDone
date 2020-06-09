@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ToDone.Data;
+using ToDone.Data.API;
+using ToDone.Data.Repositories;
 
 namespace ToDone
 {
@@ -35,6 +37,8 @@ namespace ToDone
             services.AddDbContext<UserDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
+
+            services.AddTransient<IToDoRepository, DatabaseToDoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
