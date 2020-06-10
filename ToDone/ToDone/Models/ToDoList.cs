@@ -17,6 +17,8 @@ namespace ToDone.Models
 
         public string Assignee { get; set; }
 
+        public string CreatedByUserId { get; set; }
+
 
         
     }
