@@ -7,5 +7,8 @@ namespace ToDone.Models.DTOs
 {
     public class UserWithToken
     {
+        public string Token { get; set; }
+        public string UserId { get; set; }
+
     }
 }
