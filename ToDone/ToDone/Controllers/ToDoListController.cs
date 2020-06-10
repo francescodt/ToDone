@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ToDone.Data.API;
 using ToDone.Models;
 using ToDone.Models.DTOs;
+using Task = ToDone.Models;
 
 namespace ToDone.Controllers
 {
