@@ -86,17 +86,22 @@ namespace ToDone.Controllers
         public async Task<IActionResult> Login(LoginData login)
         {
             var user = await userManager.FindByNameAsync(login.UserName);
-            if (user == null)
-                return Unauthorized();
-
-            var result = await userManager.CheckPasswordAsync(user, login.Password);
-            if (!result)
-                return Unauthorized();
-
-            return Ok(new
+            if (user != null)
             {
-                UserId = user.Id,
-            });
+                var result = await userManager.CheckPasswordAsync(user, login.Password);
+                if (result)
+                {
+                    return Ok(new UserWithToken
+                    {
+                        UserId = user.Id,
+                        Token = CreateToken(user),
+                    });
+                }
+                await userManager.AccessFailedAsync(user);
+            }
+
+            return Unauthorized();
+                
         }
     }
 }
