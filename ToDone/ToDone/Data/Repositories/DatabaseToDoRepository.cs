@@ -57,5 +57,16 @@ namespace ToDone.Data.Repositories
             _context.Entry(listItem).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<ToDoListDTO> UpdateList(ToDoListDTO list, int id)
+        {
+            if(list.Id == id)
+            {
+                _context.Entry(list).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
+            return list;
+        }
     }
 }

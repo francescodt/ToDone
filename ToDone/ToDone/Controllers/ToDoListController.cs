@@ -37,5 +37,12 @@ namespace ToDone.Controllers
         {
             await toDoRepository.DeleteListItem(id);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] ToDoListDTO List)
+        {
+            await toDoRepository.UpdateList(List, id);
+            return Ok("Updated");
+        }
     }
 }
