@@ -9,5 +9,6 @@ namespace ToDone.Data.API
     public interface IToDoRepository
     {
         Task<IEnumerable<ToDoListDTO>> GetToDoList();
+        Task<ToDoListDTO> GetOneListItem(int id);
     }
 }

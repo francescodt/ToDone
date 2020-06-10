@@ -45,7 +45,7 @@ namespace ToDone
 
             services.AddIdentity<ToDoUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>();
-            services.AddTransient<IToDoRepository, DatabaseToDoRepository>();
+            services.AddTransient<IToDoRepository, IToDoRepository>();
 
             services.AddAuthentication(options =>
             {

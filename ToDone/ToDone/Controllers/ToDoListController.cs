@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ToDone.Data.API;
+using ToDone.Data.Repositories;
 using ToDone.Models;
 using ToDone.Models.DTOs;
-using Task = ToDone.Models;
 
 namespace ToDone.Controllers
 {
@@ -14,9 +14,9 @@ namespace ToDone.Controllers
     [ApiController]
     public class ToDoListController : Controller
     {
-        private readonly IToDoRepository toDoRepository; 
+        private readonly Data.API.IToDoRepository toDoRepository; 
 
-        public ToDoListController (IToDoRepository toDoRepository)
+        public ToDoListController (Data.API.IToDoRepository toDoRepository)
         {
             this.toDoRepository = toDoRepository;
         }
@@ -24,6 +24,12 @@ namespace ToDone.Controllers
         public async Task<ActionResult<ToDoListDTO>> Index()
         {
             return Ok(await toDoRepository.GetToDoList());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ToDoListDTO> GetListItem(int id)
+        {
+            return await toDoRepository.GetOneListItem(id);
         }
     }
 }
