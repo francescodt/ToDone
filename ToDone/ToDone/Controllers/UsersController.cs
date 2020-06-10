@@ -81,5 +81,22 @@ namespace ToDone.Controllers
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             return tokenString;
         }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginData login)
+        {
+            var user = await userManager.FindByNameAsync(login.UserName);
+            if (user == null)
+                return Unauthorized();
+
+            var result = await userManager.CheckPasswordAsync(user, login.Password);
+            if (!result)
+                return Unauthorized();
+
+            return Ok(new
+            {
+                UserId = user.Id,
+            });
+        }
     }
 }
