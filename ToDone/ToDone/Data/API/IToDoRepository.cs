@@ -13,5 +13,6 @@ namespace ToDone.Data.API
         Task<ToDoListDTO> GetOneListItem(int id);
         Task DeleteListItem(int id);
         Task<ToDoListDTO> UpdateList(ToDoListDTO list, int id);
+        Task CreateListItem(ToDoListDTO list);
     }
 }

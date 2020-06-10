@@ -48,6 +48,15 @@ namespace ToDone.Controllers
             return Ok("Updated");
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateListItem([FromBody] ToDoListDTO list)
+        {
+            list.CreatedByUsedId = GetUserId();
+            await toDoRepository.CreateListItme(list);
+            return Ok("Updated");
+        }
+
         private string GetUserId()
         {
             return ((ClaimsIdentity)User.Identity).FindFirst("UserId")?.Value;

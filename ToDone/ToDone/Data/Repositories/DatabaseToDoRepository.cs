@@ -68,5 +68,11 @@ namespace ToDone.Data.Repositories
 
             return list;
         }
+
+        public async Task CreateListItem(ToDoListDTO list)
+        {
+            _context.Entry(list).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
     }
 }
