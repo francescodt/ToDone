@@ -19,6 +19,7 @@ namespace ToDone.Data.Repositories
                     Name = list.Name,
                     DueDate = list.DueDate,
                     Assignee = list.Assignee,
+                    CreatedBy = list.CreatedByUserId,
                 })
                 .ToListAsync();
             return list;
