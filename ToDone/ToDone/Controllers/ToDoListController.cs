@@ -31,5 +31,11 @@ namespace ToDone.Controllers
         {
             return await toDoRepository.GetOneListItem(id);
         }
+
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await toDoRepository.DeleteListItem(id);
+        }
     }
 }

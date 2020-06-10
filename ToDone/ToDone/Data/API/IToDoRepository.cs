@@ -10,5 +10,6 @@ namespace ToDone.Data.API
     {
         Task<IEnumerable<ToDoListDTO>> GetToDoList();
         Task<ToDoListDTO> GetOneListItem(int id);
+        Task DeleteListItem(int id);
     }
 }
