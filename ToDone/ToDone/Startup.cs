@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using ToDone.Data;
 using ToDone.Data.API;
 using ToDone.Data.Repositories;
+using ToDone.Models;
 
 namespace ToDone
 {
@@ -38,6 +40,8 @@ namespace ToDone
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
 
+            services.AddIdentity<ToDoUser, IdentityRole>()
+                .AddEntityFrameworkStores<UserDbContext>();
             services.AddTransient<IToDoRepository, DatabaseToDoRepository>();
         }
 
