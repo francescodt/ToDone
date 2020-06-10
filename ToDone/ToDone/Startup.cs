@@ -43,6 +43,9 @@ namespace ToDone
             services.AddIdentity<ToDoUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>();
             services.AddTransient<IToDoRepository, DatabaseToDoRepository>();
+
+            services.AddAuthentication()
+                .AddJwtBearer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,9 +56,11 @@ namespace ToDone
                 app.UseDeveloperExceptionPage();
             }
 
-
-
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
