@@ -7,6 +7,7 @@ using ToDone.Data.API;
 using ToDone.Data.Repositories;
 using ToDone.Models;
 using ToDone.Models.DTOs;
+using System.Security.Claims;
 
 namespace ToDone.Controllers
 {
@@ -43,6 +44,11 @@ namespace ToDone.Controllers
         {
             await toDoRepository.UpdateList(List, id);
             return Ok("Updated");
+        }
+
+        private string GetUserId()
+        {
+            return ((ClaimsIdentity)User.Identity).FindFirst("UserId")?.Value;
         }
     }
 }
