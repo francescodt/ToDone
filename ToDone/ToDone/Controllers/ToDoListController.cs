@@ -8,6 +8,7 @@ using ToDone.Data.Repositories;
 using ToDone.Models;
 using ToDone.Models.DTOs;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToDone.Controllers
 {
@@ -39,6 +40,7 @@ namespace ToDone.Controllers
             await toDoRepository.DeleteListItem(id);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] ToDoListDTO List)
         {
