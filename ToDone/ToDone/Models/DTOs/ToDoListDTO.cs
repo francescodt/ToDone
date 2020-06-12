@@ -14,6 +14,8 @@ namespace ToDone.Models.DTOs
         public DateTime? DueDate { get; set; }
 
         public string Assignee { get; set; }
+        
+        public string CreatedBy { get; set; }
 
 
     }

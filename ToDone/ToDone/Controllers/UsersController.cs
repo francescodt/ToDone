@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 using ToDone.Models;
 using ToDone.Models.DTOs;
 
@@ -75,6 +76,7 @@ namespace ToDone.Controllers
 
             var token = new JwtSecurityToken(
                 claims: tokenClaims,
+                expires: DateTime.UtcNow.AddHours(6),
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
 
                 );
@@ -102,6 +104,31 @@ namespace ToDone.Controllers
 
             return Unauthorized();
                 
+        }
+
+        [Authorize]
+        [HttpGet("Self")]
+        public async Task<IActionResult> Self()
+        {
+            if (HttpContext.User.Identity is ClaimsIdentity identity)
+            {
+                var userClaim = identity.FindFirst("UserId");
+                var userId = userClaim.Value;
+                var user = await userManager.FindByIdAsync(userId);
+
+                if (user == null)
+                    return Unauthorized();
+
+                return Ok(new
+                {
+                    UserId = user.Id,
+                    user.Email,
+                    user.FirstName,
+                    user.LastName,
+                });
+            }
+
+            return Unauthorized();
         }
     }
 }
